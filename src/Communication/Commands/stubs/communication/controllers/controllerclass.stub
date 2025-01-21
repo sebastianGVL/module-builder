@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Business\DummyClass\Facades\DummyClassFacade;
+use App\Communication\DummyClass\Requests\DummyClassRequest;
+use App\Http\Controllers\Controller;
+
+class DummyClassController extends Controller
+{
+    public function __construct(private readonly DummyClassFacade $facade)
+    {
+    }
+
+    public function store(DummyClassRequest $request): int
+    {
+        return $this->facade->store(DummyClassData::fromRequest($request));
+    }
+
+    public function update(int $id, DummyClassRequest $request): int
+    {
+        return $this->facade->update($id, DummyClassData::fromRequest($request));
+    }
+
+    public function delete(int $id): ?bool
+    {
+        return $this->facade->delete($id);
+    }
+}

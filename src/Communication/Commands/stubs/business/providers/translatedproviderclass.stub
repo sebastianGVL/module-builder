@@ -1,0 +1,105 @@
+<?php
+
+declare(strict_types=1);
+
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Facades\DummyClassFacade;
+use App\Business\DummyClass\Services\Creator\AbstractDummyClassCreator;
+use App\Business\DummyClass\Services\Creator\DummyClassCreator;
+use App\Persistence\DummyClass\Services\Saver\AbstractDummyClassSaver;
+use App\Persistence\DummyClass\Services\Saver\DummyClassSaver;
+use App\Persistence\DummyClass\Services\Updater\AbstractDummyClassUpdater;
+use App\Persistence\DummyClass\Services\Updater\DummyClassUpdater;
+use App\Persistence\DummyClass\Services\Deleter\DummyClassDeleter;
+use App\Persistence\DummyClass\Services\Deleter\DummyClassDeleterInterface;
+use App\Persistence\DummyClass\Services\TranslaterSaver\AbstractDummyClassTranslationSaver;
+use App\Business\DummyClass\Services\TranslaterCreator\AbstractDummyClassTranslationCreator;
+use App\Persistence\DummyClass\Services\TranslaterSaver\DummyClassTranslationSaver;
+use App\Business\DummyClass\Services\TranslaterCreator\DummyClassTranslationCreator;
+
+use Illuminate\Support\ServiceProvider;
+
+class DummyClassServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        if ($this->app->runningUnitTests()) {
+            $this->app->bind(AbstractDummyClassCreator::class, DummyClassCreator::class);
+            $this->app->bind(AbstractDummyClassSaver::class, DummyClassSaver::class);
+            $this->app->bind(AbstractDummyClassUpdater::class, DummyClassUpdater::class);
+            $this->app->bind(DummyClassDeleterInterface::class, DummyClassDeleter::class);
+            $this->app->bind(AbstractDummyClassTranslationCreator::class, DummyClassTranslationCreator::class);
+            $this->app->bind(AbstractDummyClassTranslationSaver::class, DummyClassTranslationSaver::class);
+        }
+
+        $this->app->when(DummyClassFacade::class)
+            ->needs(AbstractDummyClassCreator::class)
+            ->give(function ($app) {
+                return $app->make(DummyClassCreator::class);
+            });
+
+        $this->app->when(DummyClassFacade::class)
+            ->needs(AbstractDummyClassSaver::class)
+            ->give(function ($app) {
+                return $app->make(DummyClassSaver::class);
+            });
+
+        $this->app->when(DummyClassFacade::class)
+            ->needs(AbstractDummyClassUpdater::class)
+            ->give(function ($app) {
+                return $app->make(DummyClassUpdater::class);
+            });
+
+        $this->app->when(DummyClassFacade::class)
+            ->needs(DummyClassDeleterInterface::class)
+            ->give(function ($app) {
+                 return $app->make(DummyClassDeleter::class);
+            });
+
+        $this->app->when(DummyClassFacade::class)
+             ->needs(AbstractDummyClassTranslationCreator::class)
+             ->give(function ($app) {
+                 return $app->make(DummyClassTranslationCreator::class);
+             });
+
+        $this->app->when(DummyClassFacade::class)
+             ->needs(AbstractDummyClassTranslationSaver::class)
+             ->give(function ($app) {
+                 return $app->make(DummyClassTranslationSaver::class);
+             });
+    }
+
+    public function boot(): void
+    {
+        $this->loadMigrationsFrom('app/Persistence/' . $this->getModelName() . '/database/migrations');
+
+        if(file_exists($this->getRoutePath()))
+        {
+            $this->loadRoutesFrom($this->getRoutePath());
+        }
+
+        if(file_exists($this->getRoutePath('api.php')))
+        {
+            $this->loadRoutesFrom($this->getRoutePath('api.php'));
+        }
+    }
+
+    private function getModelName(): string
+    {
+        $explodedNamespace = explode('\\', __NAMESPACE__);
+
+        return $explodedNamespace[array_key_last($explodedNamespace)];
+    }
+
+    private function getRouteBasePath(): string
+    {
+        return str_replace('/Business/' . $this->getModelName(), '', __DIR__);
+    }
+
+    private function getRoutePath(string $filename = 'web.php'): string
+    {
+        return $this->getRouteBasePath() . '/Communication/' . $this->getModelName() . '/routes/'.$filename;
+    }
+}

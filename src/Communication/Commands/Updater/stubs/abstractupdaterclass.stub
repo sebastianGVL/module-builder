@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Persistence\DummyClass\DummyClass;
+
+abstract class AbstractDummyClassUpdater
+{
+    public function update(int $id, DummyClassData $data): DummyClass
+    {
+        /** @var DummyClass $model */
+        $model = DummyClass::findOrFail($id);
+
+        return $this->updateFromData($model, $data);
+    }
+
+    abstract protected function updateFromData(DummyClass $model, DummyClassData $data): DummyClass;
+}

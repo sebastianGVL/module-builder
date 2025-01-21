@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Business\DummyClass\Services\Creator\AbstractDummyClassCreator;
+use App\Persistence\DummyClass\Services\Saver\AbstractDummyClassSaver;
+use App\Persistence\DummyClass\Services\Updater\AbstractDummyClassUpdater;
+use App\Persistence\DummyClass\Services\Deleter\DummyClassDeleterInterface;
+use App\Persistence\DummyClass\Services\TranslaterSaver\AbstractDummyClassTranslationSaver;
+use App\Business\DummyClass\Services\TranslaterCreator\AbstractDummyClassTranslationCreator;
+
+class DummyClassFacade
+{
+    public function __construct(
+        private readonly AbstractDummyClassCreator $creator,
+        private readonly AbstractDummyClassSaver   $saver,
+        private readonly AbstractDummyClassUpdater $updater,
+        private readonly DummyClassDeleterInterface $deleter,
+        private readonly AbstractDummyClassTranslationCreator $translationCreator,
+        private readonly AbstractDummyClassTranslationSaver $translationSaver
+    )
+    {
+    }
+
+    public function store(DummyClassData $data): int
+    {
+        $model = $this->creator->create($data);
+        $this->saver->save($model);
+
+        if($data->translations){
+            foreach ($data->translations as $item) {
+                $translation = $this->translationCreator->create($model->id, $item);
+                $this->translationSaver->save($translation);
+            }
+        }
+
+        return $model->id;
+    }
+
+    public function update(int $id, DummyClassData $data): int
+    {
+        $model = $this->updater->update($id, $data);
+
+        $model->translations()->delete();
+
+        if($data->translations){
+            foreach ($data->translations as $item) {
+                $translation = $this->translationCreator->create($model->id, $item);
+                $this->translationSaver->save($translation);
+            }
+        }
+
+        return $this->saver->save($model);
+    }
+
+    public function delete(int $id): ?bool
+    {
+        return $this->deleter->delete($id);
+    }
+}

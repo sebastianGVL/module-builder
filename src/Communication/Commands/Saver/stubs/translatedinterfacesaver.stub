@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClassTranslation;
+
+interface DummyClassTranslationSaverInterface
+{
+    public function save(DummyClassTranslation $model): int;
+}

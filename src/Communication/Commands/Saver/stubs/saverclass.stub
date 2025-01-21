@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClass;
+
+class DummyClassSaver extends AbstractDummyClassSaver
+{
+    protected function validate(DummyClass $model): void
+    {
+        return;
+    }
+}

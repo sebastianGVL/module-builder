@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Persistence\DummyClass\DummyClass;
+
+interface DummyClassCreatorInterface
+{
+    public function create(DummyClassData $data): DummyClass;
+}

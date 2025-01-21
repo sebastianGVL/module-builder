@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClassTranslation;
+
+class DummyClassTranslationSaver extends AbstractDummyClassTranslationSaver
+{
+    protected function validate(DummyClassTranslation $model): void
+    {
+        return;
+    }
+}

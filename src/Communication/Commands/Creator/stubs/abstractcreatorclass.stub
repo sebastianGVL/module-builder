@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Persistence\DummyClass\DummyClass;
+
+abstract class AbstractDummyClassCreator implements DummyClassCreatorInterface
+{
+    public function create(DummyClassData $data): DummyClass
+    {
+        $this->validate($data);
+
+        return $this->createModelFromData($data);
+    }
+
+    abstract protected function validate(DummyClassData $data): void;
+
+    abstract protected function createModelFromData(DummyClassData $data): ?DummyClass;
+}
+

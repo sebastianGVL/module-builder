@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClass;
+
+interface DummyClassSaverInterface
+{
+    public function save(DummyClass $model): int;
+}

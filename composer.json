@@ -1,0 +1,30 @@
+{
+    "name": "abacus/module-builder",
+    "description": "A Laravel inhouse package for building modules",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Abacus\\ModuleBuilder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sebastian Vlasceanu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "version": "v3.0.0",
+    "type": "library",
+    "require": {
+        "php": "^8.1 || ^8.0",
+        "laravel/framework": ">=8.0",
+        "spatie/laravel-data": "2.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Abacus\\ModuleBuilder\\ModuleBuilderServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use Spatie\LaravelData\DataCollection;
+
+class DummyClass extends DataCollection
+{
+
+}

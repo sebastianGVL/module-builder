@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Persistence\DummyClass\DummyClass;
+
+class DummyClassUpdater extends AbstractDummyClassUpdater
+{
+    protected function updateFromData(DummyClass $model, DummyClassData $data): DummyClass
+    {
+        return $model;
+    }
+}

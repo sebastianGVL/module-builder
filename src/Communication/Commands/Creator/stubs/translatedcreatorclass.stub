@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+
+use App\Business\DummyClass\Data\DummyClassTranslationData;
+use App\Persistence\DummyClass\DummyClassTranslation;
+
+class DummyClassTranslationCreator extends AbstractDummyClassTranslationCreator
+{
+    protected function validate(DummyClassTranslationData $data): void
+    {
+        return;
+    }
+
+    protected function createModelFromData(
+        int $model_id,
+        DummyClassTranslationData $data
+    ): ?DummyClassTranslation {
+        $model = new DummyClassTranslation();
+
+        $model->locale = $data->locale;
+
+        return $model;
+    }
+}

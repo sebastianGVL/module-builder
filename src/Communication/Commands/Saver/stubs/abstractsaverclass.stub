@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClass;
+
+abstract class AbstractDummyClassSaver implements DummyClassSaverInterface
+{
+    public function save(DummyClass $model): int
+    {
+        $this->validate($model);
+
+        $model->save();
+
+        return $model->id;
+    }
+
+    abstract protected function validate(DummyClass $model): void;
+}

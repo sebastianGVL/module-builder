@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Persistence\DummyClass\DummyClass;
+
+interface DummyClassDeleterInterface
+{
+    public function delete(int $id): ?bool;
+}

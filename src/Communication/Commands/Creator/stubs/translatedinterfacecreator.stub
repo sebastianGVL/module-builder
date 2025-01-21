@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassTranslationData;
+use App\Persistence\DummyClass\DummyClassTranslation;
+
+interface DummyClassTranslationCreatorInterface
+{
+    public function create(int $model_id, DummyClassTranslationData $data): DummyClassTranslation;
+}

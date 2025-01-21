@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use App\Business\DummyClass\Data\DummyClassData;
+use App\Persistence\DummyClass\DummyClass;
+
+class DummyClassCreator extends AbstractDummyClassCreator
+{
+
+    protected function validate(DummyClassData $data): void
+    {
+        return;
+    }
+
+    protected function createModelFromData(DummyClassData $data): ?DummyClass
+    {
+        $model = new DummyClass();
+
+
+        return $model;
+    }
+}
