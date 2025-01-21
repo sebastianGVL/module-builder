@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace DummyNamespace;
 
-use Spatie\LaravelData\Data;
 use Illuminate\Http\Request;
 
-class DummyClass extends Data
-{
+class DummyClass
     public function __construct(
     )
     {
