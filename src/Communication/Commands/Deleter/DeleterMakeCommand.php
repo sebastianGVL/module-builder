@@ -21,7 +21,7 @@ class DeleterMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/deleterclass.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/deleterclass.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

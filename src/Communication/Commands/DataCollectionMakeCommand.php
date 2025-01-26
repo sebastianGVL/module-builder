@@ -20,7 +20,7 @@ class DataCollectionMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath("/stubs/business/data/datacollectionclass.stub");
+        return $this->resolveStubPath(__DIR__, "/stubs/business/data/datacollectionclass.stub");
     }
 
     protected function getDefaultNamespace($rootNamespace): string

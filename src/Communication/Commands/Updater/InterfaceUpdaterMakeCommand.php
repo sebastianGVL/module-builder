@@ -21,7 +21,7 @@ class InterfaceUpdaterMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/interfaceupdater.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/interfaceupdater.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

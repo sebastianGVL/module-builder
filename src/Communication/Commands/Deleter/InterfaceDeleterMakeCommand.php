@@ -21,7 +21,7 @@ class InterfaceDeleterMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/interfacedeleter.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/interfacedeleter.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

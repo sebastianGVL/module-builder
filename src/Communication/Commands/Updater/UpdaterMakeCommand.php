@@ -21,7 +21,7 @@ class UpdaterMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/updaterclass.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/updaterclass.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

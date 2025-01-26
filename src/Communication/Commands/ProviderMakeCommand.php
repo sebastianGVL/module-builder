@@ -24,7 +24,7 @@ class ProviderMakeCommand extends GeneratorCommand
     {
         $class = $this->option('translated') ? 'translatedproviderclass.stub' : 'providerclass.stub';
 
-        return $this->resolveStubPath("/stubs/business/providers/" . $class);
+        return $this->resolveStubPath(__DIR__ ,"/stubs/business/providers/" . $class);
     }
 
     protected function getOptions()

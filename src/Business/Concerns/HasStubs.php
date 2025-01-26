@@ -6,10 +6,10 @@ namespace Abacus\ModuleBuilder\Business\Concerns;
 
 trait HasStubs 
 {
-    protected function resolveStubPath(string $stub): string
+    protected function resolveStubPath(string $basePath, string $stub): string
     {
         return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
             ? $customPath
-            : __DIR__ . $stub;
+            : $basePath . $stub;
     }
 }

@@ -22,7 +22,7 @@ class AbstractUpdaterMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/abstractupdaterclass.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/abstractupdaterclass.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

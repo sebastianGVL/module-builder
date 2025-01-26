@@ -30,7 +30,7 @@ class FacadeMakeCommand extends GeneratorCommand
     {
         $class = $this->option('translated') ? 'translatedfacadeclass.stub' : 'facadeclass.stub';
 
-        return $this->resolveStubPath("/stubs/business/facades/" . $class);
+        return $this->resolveStubPath(__DIR__, "/stubs/business/facades/" . $class);
     }
 
     protected function getDefaultNamespace($rootNamespace): string

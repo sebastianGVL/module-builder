@@ -18,7 +18,7 @@ class ControllerMakeCommand extends GeneratorCommand
 
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/communication/controllers/controllerclass.stub');
+        return $this->resolveStubPath(__DIR__, '/stubs/communication/controllers/controllerclass.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace): string

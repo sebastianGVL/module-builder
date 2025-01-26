@@ -29,7 +29,7 @@ class DataMakeCommand extends GeneratorCommand
     {
         $class = $this->option('translated') ? 'translateddataclass.stub' : 'dataclass.stub';
 
-        return $this->resolveStubPath("/stubs/business/data/" . $class);
+        return $this->resolveStubPath(__DIR__, "/stubs/business/data/" . $class);
     }
 
     protected function getDefaultNamespace($rootNamespace): string
