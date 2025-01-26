@@ -17,14 +17,52 @@ php artisan abacus:create:module Car
    
 Don't forget to update your `bootstrap/providers.php`
 
-PS: In case your default controller is moved from default location,update the Communication/{module}/Controllers/*Controller.php accordingly.
-
 ```php
 <?php
+
+use App\Providers\AppServiceProvider;
+use App\Business\Car\CarServiceProvider;
 
 return [
     AppServiceProvider::class,
     CarServiceProvider::class,
 ];
 
+```
+
+PS: In case your default controller is moved from default location,update the Communication/{module}/Controllers/*Controller.php accordingly.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Communication\Car\Controllers;
+
+use App\Business\Car\Data\CarData;
+use App\Business\Car\Facades\CarFacade;
+use App\Communication\Car\Requests\CarRequest;
+use App\Http\Controllers\Controller; // <- Check this
+
+class CarController extends Controller
+{
+    public function __construct(private readonly CarFacade $facade)
+    {
+    }
+
+    public function store(CarRequest $request): int
+    {
+        return $this->facade->store(CarData::fromRequest($request));
+    }
+
+    public function update(int $id, CarRequest $request): int
+    {
+        return $this->facade->update($id, CarData::fromRequest($request));
+    }
+
+    public function delete(int $id): ?bool
+    {
+        return $this->facade->delete($id);
+    }
+}
 ```
