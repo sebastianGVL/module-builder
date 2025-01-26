@@ -14,3 +14,17 @@ If you want it to be translated, you add the --translated option to the command.
 ```bash
 php artisan abacus:create:module Car
 ```
+   
+Don't forget to update your `bootstrap/providers.php`
+
+PS: In case your default controller is moved from default location,update the Communication/{module}/Controllers/*Controller.php accordingly.
+
+```php
+<?php
+
+return [
+    AppServiceProvider::class,
+    CarServiceProvider::class,
+];
+
+```
